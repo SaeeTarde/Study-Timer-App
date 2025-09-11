@@ -19,11 +19,14 @@ function UpdateGoal() {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await fetch(`http://localhost:5000/api/goals/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/goals/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Failed to fetch goal");
@@ -47,12 +50,15 @@ function UpdateGoal() {
         return;
       }
 
-      const res = await fetch(`http://localhost:5000/api/goals/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/goals/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to delete goal");
@@ -75,14 +81,17 @@ function UpdateGoal() {
         return;
       }
 
-      const res = await fetch(`http://localhost:5000/api/goals/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ goalName, goalTime }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/goals/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ goalName, goalTime }),
+        }
+      );
 
       const data = await res.json();
 

@@ -39,9 +39,12 @@ function Timer() {
         const token = localStorage.getItem("token");
         if (!token || !goalId) return;
 
-        const res = await fetch(`http://localhost:5000/api/goals/${goalId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/goals/${goalId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Failed to fetch goal");

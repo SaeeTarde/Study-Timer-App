@@ -21,7 +21,7 @@ function AddGoal() {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/goals", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/goals`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

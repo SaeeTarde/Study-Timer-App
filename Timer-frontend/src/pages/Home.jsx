@@ -16,7 +16,7 @@ function Home() {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await fetch("http://localhost:5000/api/goals", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/goals`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
