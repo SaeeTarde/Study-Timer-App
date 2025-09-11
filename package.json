@@ -39,6 +39,9 @@
       "preload.js",
       "package.json",
       "Timer-frontend/dist/**/*"
-    ]
+    ],
+    "win": {
+      "icon": "assets/icon2.ico"
+    }
   }
 }
