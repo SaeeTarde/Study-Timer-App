@@ -7,6 +7,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState(null);
 
   const handleLogin = async () => {
     try {
@@ -32,9 +33,9 @@ function Login() {
       localStorage.setItem("userId", data.userId);
 
       console.log("Login successful:", data);
-
+      setToken(data.token); // 🔑 notify App
       // Navigate to Home.jsx
-      navigate("/home");
+      navigate("/home", { replace: true });
     } catch (err) {
       alert(err.message);
     } finally {

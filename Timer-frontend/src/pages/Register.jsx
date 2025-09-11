@@ -8,6 +8,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // prevent double clicks
+  const [token, setToken] = useState(null);
 
   const handleClose = () => {
     if (window.electronAPI) {
@@ -19,6 +21,7 @@ function Register() {
 
   const handleRegister = async () => {
     try {
+      setLoading(true);
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/auth/register`,
         {
@@ -37,10 +40,18 @@ function Register() {
       }
 
       console.log("✅ Register success:", data);
-      navigate("/home"); // go to home on success
+
+      // Save token + userId in localStorage (same as Login.jsx)
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
+      setToken(data.token); // 🔑 tell App that token exists
+      // Navigate immediately
+      navigate("/home", { replace: true });
     } catch (err) {
       console.error("❌ Register error:", err);
       setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -190,10 +201,11 @@ function Register() {
       {/* Register Button */}
       <button
         onClick={handleRegister}
+        disabled={loading}
         className="px-[20px] py-[5px] mb-3 rounded-2xl text-white font-['Pixelify_Sans'] text-xl tracking-wider"
         {...getButtonProps()}
       >
-        Register
+        {loading ? "Registering..." : "Register"}
       </button>
 
       <h4 className="text-white text-1xl font-['Pixelify_Sans'] mt-[30px] mb-[10px]">

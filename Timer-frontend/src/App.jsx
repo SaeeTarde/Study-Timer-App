@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   HashRouter as Router,
   Routes,
@@ -16,7 +16,29 @@ import UpdateGoal from "./pages/UpdateGoal.jsx";
 import "./App.css";
 
 function App() {
-  const token = localStorage.getItem("token"); // check token in storage
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  // listen for token changes (e.g. after login/register)
+  useEffect(() => {
+    const syncToken = () => setToken(localStorage.getItem("token"));
+
+    // listen to both local changes + external storage changes
+    window.addEventListener("storage", syncToken);
+
+    // also patch localStorage.setItem so it updates token immediately
+    const originalSetItem = localStorage.setItem;
+    localStorage.setItem = function (key, value) {
+      originalSetItem.apply(this, [key, value]);
+      if (key === "token") {
+        syncToken();
+      }
+    };
+
+    return () => {
+      window.removeEventListener("storage", syncToken);
+      localStorage.setItem = originalSetItem; // restore
+    };
+  }, []);
 
   return (
     <Router>

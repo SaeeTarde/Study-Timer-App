@@ -25,13 +25,13 @@ function AddGoal() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // ✅ send token
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ goalName, goalTime }),
       });
 
       const data = await res.json();
-
+      console.log("Sending token:", token);
       if (!res.ok) {
         throw new Error(data.error || "Failed to create goal");
       }
