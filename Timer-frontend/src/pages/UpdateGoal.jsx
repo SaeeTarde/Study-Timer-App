@@ -331,20 +331,6 @@ function UpdateGoal() {
         >
           Delete
         </button>
-
-        {/* Start */}
-        <button
-          onClick={handleStart}
-          className="px-[10px] py-3 rounded-2xl text-white font-['Pixelify_Sans'] 
-    text-2xl tracking-wider border-2 border-[#3b0764] 
-    shadow-[6px_6px_0_#3b0764] 
-    transition-all duration-150 
-    hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_#3b0764]
-    active:translate-x-[6px] active:translate-y-[6px] active:shadow-[0px_0px_0_#3b0764]"
-          style={{ background: "#7e22ce" }}
-        >
-          Start
-        </button>
       </div>
     </div>
   );

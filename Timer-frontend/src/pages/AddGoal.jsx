@@ -241,20 +241,11 @@ function AddGoal() {
         <button
           onClick={handleSave}
           disabled={loading}
-          className="px-[12px] py-3 rounded-2xl text-white font-['Pixelify_Sans'] 
+          className="px-[18px] py-3 rounded-2xl text-white font-['Pixelify_Sans'] 
           text-2xl tracking-wider shadow-[0_6px_0_#3b0764] active:translate-y-[4px]"
           style={{ background: "#7e22ce", border: "3px solid #000" }}
         >
           {loading ? "Saving..." : "Save"}
-        </button>
-
-        <button
-          onClick={handleStart}
-          className="px-8 py-3 rounded-2xl text-white font-['Pixelify_Sans'] 
-          text-2xl tracking-wider shadow-[0_6px_0_#3b0764] active:translate-y-[4px]"
-          style={{ background: "#7e22ce", border: "3px solid #000" }}
-        >
-          Start
         </button>
       </div>
     </div>
